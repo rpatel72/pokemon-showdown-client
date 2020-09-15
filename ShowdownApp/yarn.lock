@@ -974,6 +974,14 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@callstack/react-theme-provider@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-3.0.5.tgz#a173e455e9603c9c45357a3b6ace1273086527ca"
+  integrity sha512-Iec+ybWN0FvNj87sD3oWo/49edGUP0UOSdMnzCJEFJIDYr992ECIuOV89burAAh2/ibPCxgLiK6dmgv2mO/8Tg==
+  dependencies:
+    deepmerge "^3.2.0"
+    hoist-non-react-statics "^3.3.0"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -1268,6 +1276,14 @@
   integrity sha512-J/CsHdIjYBRe81UUiLOoz9NSrQ91uP23Oe21QPCALInRHx+rfwo2oPl6Fn8xAa7n8Dtt2oQUGyF+g5d05cB74w==
   dependencies:
     nanoid "^3.1.12"
+
+"@react-navigation/stack@^5.9.0":
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.9.0.tgz#bf24607175bf502798cc4c832aa8a86e55f3b365"
+  integrity sha512-kt6M0ZLMyNKXfKi50n01bHg4/d8zp0Yh5QaQG4d1roWOqdV9ou1nFEK4l2yQ6XKH2lLSYswHElPDZUuWd+6XzA==
+  dependencies:
+    color "^3.1.2"
+    react-native-iphone-x-helper "^1.2.1"
 
 "@types/color-name@^1.1.1":
   version "1.1.1"
@@ -2472,6 +2488,11 @@ expo-constants@~9.1.1:
     fbjs "1.0.0"
     uuid "^3.3.2"
 
+expo-core@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/expo-core/-/expo-core-3.0.1.tgz#500ec72ff2eb3dbdf91a7074f89e70b67293330d"
+  integrity sha512-tVg/AHDOGzRAgjyfPmsKorvI1igWAg7aYLKIjj5m7VwSMP5MuF8BYglztTd/b+zULaN8dm2YUor+KoAK9Xn+HA==
+
 expo-error-recovery@~1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/expo-error-recovery/-/expo-error-recovery-1.2.2.tgz#512a92610c267201eae2a8c5e9e744aa34400e5f"
@@ -2526,6 +2547,16 @@ expo-permissions@~9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-9.0.1.tgz#dc10b58654bbe39bbbed5827369942b01b08055e"
   integrity sha512-CosJgy8XQRN/OFG2JTQDcFxz3XTGi27coCMym/hVXWtQfk0z6PwdRG5IXHfLGuSckwIcgmirrwm2+Zc0X3MmNg==
+
+expo-react-native-adapter@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/expo-react-native-adapter/-/expo-react-native-adapter-3.0.1.tgz#6ff8c49610b4c6f43385060287910d5349a2e16e"
+  integrity sha512-QieqynpLzbYAaR8pEc3k6WsvD7xN9/hCgcYOwLihiwg43FX/yOJaIISIY9LqnT2AD9wkDKbMhz1We0KPezxtCg==
+  dependencies:
+    invariant "^2.2.4"
+    lodash.omit "^4.5.0"
+    lodash.pick "^4.4.0"
+    prop-types "^15.6.1"
 
 expo-splash-screen@^0.5.0:
   version "0.5.0"
@@ -2978,6 +3009,13 @@ hoist-non-react-statics@^2.3.1:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
+
+hoist-non-react-statics@^3.3.0:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
+  integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
+  dependencies:
+    react-is "^16.7.0"
 
 http-errors@~1.7.2:
   version "1.7.3"
@@ -3575,6 +3613,16 @@ locate-path@^5.0.0:
   integrity sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
   dependencies:
     p-locate "^4.1.0"
+
+lodash.omit@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.omit/-/lodash.omit-4.5.0.tgz#6eb19ae5a1ee1dd9df0b969e66ce0b7fa30b5e60"
+  integrity sha1-brGa5aHuHdnfC5aeZs4Lf6MLXmA=
+
+lodash.pick@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
+  integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
 
 lodash.throttle@^4.1.1:
   version "4.1.1"
@@ -4513,7 +4561,7 @@ react-dom@~16.11.0:
     prop-types "^15.6.2"
     scheduler "^0.17.0"
 
-react-is@^16.12.0, react-is@^16.13.0, react-is@^16.8.1, react-is@^16.8.4:
+react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -4542,6 +4590,20 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
+react-native-maps@0.27.1:
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.27.1.tgz#2f10cd417bb2fd938c9e015b1c9b6d9b1a44b97f"
+  integrity sha512-HygBkZBecTnIVRYrSiLRAvu4OmXOYso/A7c6Cy73HkOh9CgGV8Ap5eBea24tvmFGptjj5Hg8AJ94/YbmWK1Okw==
+
+react-native-paper@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-4.1.0.tgz#26500fbfbb6af62aa9381eee22e508b8f2258c47"
+  integrity sha512-ML4cH31J7cfkkzP2p2YdCNaKeSY3gin04CESlshB4p95jLoN4VmfoDsvd/CTAibd+GJbsdDTJrk9VwHyLEVhlQ==
+  dependencies:
+    "@callstack/react-theme-provider" "^3.0.5"
+    color "^3.1.2"
+    react-native-safe-area-view "^0.14.9"
+
 react-native-reanimated@~1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.9.0.tgz#38676c99dd585504fdc7331efb45e5f48ec7339a"
@@ -4553,6 +4615,13 @@ react-native-safe-area-context@~3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.0.7.tgz#0f53de7a30d626d82936000f3f6db374ecc4b800"
   integrity sha512-dqhRTlIFe5+P1yxitj0C9XVUxLqOmjomeqzUSSY8sNOWVjtIhEY/fl4ZKYpAVnktd8dt3zl13XmJTmRmy3d0uA==
+
+react-native-safe-area-view@^0.14.9:
+  version "0.14.9"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.9.tgz#90ee8383037010d9a5055a97cf97e4c1da1f0c3d"
+  integrity sha512-WII/ulhpVyL/qbYb7vydq7dJAfZRBcEhg4/UWt6F6nAKpLa3gAceMOxBxI914ppwSP/TdUsandFy6lkJQE0z4A==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
 
 react-native-screens@~2.9.0:
   version "2.9.0"

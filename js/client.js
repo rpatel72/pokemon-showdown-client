@@ -1455,7 +1455,7 @@ function toId() {
 			var roomTable = {
 				'': MainMenuRoom,
 				'teambuilder': TeambuilderRoom,
-				'rooms': RoomsRoom,
+				// 'rooms': RoomsRoom,
 				'battles': BattlesRoom,
 				'ladder': LadderRoom,
 				'lobby': ChatRoom,
