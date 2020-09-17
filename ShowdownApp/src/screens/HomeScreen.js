@@ -13,17 +13,14 @@ export default function HomeScreen() {
   const [loginName, setLoginName] = useState("Login");
   const [modalVisible, setModalVisible] = useState(false);
 
-  function doLogin(){
-    setModalVisible(true);
-    // setLoginStatus(true);
-    // setLoginName("TestName");
+  function doLogin(name){
+    setLoginStatus(true);
+    setLoginName(name);
   }
 
   function doLogout(){
-    
-    setModalVisible(false);
-    // setLoginStatus(false);
-    // setLoginName("Login");
+    setLoginStatus(false);
+    setLoginName("Login");
   }
 
   
@@ -45,7 +42,7 @@ export default function HomeScreen() {
             headerRight: () => (
               <Button
                 onPress={() => {
-                  doLogin();
+                  setModalVisible(true);
                 }}
                 title={loginName}
                 color="#bb82bd"
@@ -56,7 +53,7 @@ export default function HomeScreen() {
             }
           }}
         >
-          {props => <HomeScreenComponent {...props} loginData={loginData} modalVisible={modalVisible} doLogout={doLogout} />}
+          {props => <HomeScreenComponent {...props} loginData={loginData} modalVisible={modalVisible} setModalVisible={setModalVisible} doLogin={doLogin} doLogout={doLogout}  />}
 
         </Stack.Screen>
       </Stack.Navigator>

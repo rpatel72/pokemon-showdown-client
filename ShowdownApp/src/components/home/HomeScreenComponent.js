@@ -9,7 +9,7 @@ import {
   TextInput
 } from "react-native";
 
-export default function HomeScreenComponent({navigation, loginData, modalVisible, doLogout}) {
+export default function HomeScreenComponent({navigation, loginData, modalVisible, setModalVisible, doLogin, doLogout}) {
   const [userNameValue, onChangeUsernameText] = React.useState('');
   let isLoggedIn = (loginData.loginStatus && loginData.loginName != "Login");
 
@@ -29,12 +29,25 @@ export default function HomeScreenComponent({navigation, loginData, modalVisible
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>{headerText}</Text>
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={doLogout}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableHighlight>
+            <View style={{ flexDirection:"row" , marginTop: 10}}>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "green", marginRight: 5 }}
+                onPress={() => {
+                  doLogout()
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={styles.textStyle}>Logout</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#2196F3", marginHorizontal: 5 }}
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={styles.textStyle}>Close</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
       </Modal> 
@@ -53,16 +66,36 @@ export default function HomeScreenComponent({navigation, loginData, modalVisible
             <Text style={styles.modalChooseNameText}>Choose name:</Text>
 
             <TextInput
-              style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "80%", padding: 3, margin: 10}}
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%", padding: 3, marginBottom: 10}}
               onChangeText={text => onChangeUsernameText(text)}
               value={userNameValue}
             />
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={doLogout}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableHighlight>
+            <View style={{ flexDirection:"row" }}>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "green", marginRight: 5 }}
+                onPress={() => {
+                  console.log(userNameValue);
+                  console.log(0 !== userNameValue.length);
+                  console.log(loginData.loginName === 'Login');
+                  if (userNameValue && 0 !== userNameValue.length && userNameValue.toLowerCase() !== 'login' && loginData.loginName.toLowerCase() === 'login') {
+                    doLogin(userNameValue.trim())
+                    setModalVisible(false);
+                  } else {
+                    alert("Null or invalid username. Please enter a valid username.")
+                  }
+                }}
+              >
+                <Text style={styles.textStyle}>Login</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#2196F3", marginHorizontal: 5 }}
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={styles.textStyle}>Close</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
       </Modal>
@@ -110,6 +143,7 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   modalChooseNameText: {
-    textAlign: "left"
+    textAlign: "left",
+    marginBottom: 5
   }
 });
