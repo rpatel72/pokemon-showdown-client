@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreenComponent from '../components/home/HomeScreenComponent';
 import { submitCheckUsernameRequest } from '../utilities/Network'
 
+console.log(global.BattleTextParser.parseBattleLine);
 const Stack = createStackNavigator();
 
 export default function HomeScreen() {

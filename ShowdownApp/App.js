@@ -8,6 +8,8 @@ import BattleScreen from './src/screens/BattleScreen'
 import { generateWSString } from './src/utilities/Network'
 import SockJS from 'sockjs-client';
 
+require('./src/utilities/BattleTextParser');
+
 const Tab = createBottomTabNavigator();
 
 var ws = new WebSocket(generateWSString());
