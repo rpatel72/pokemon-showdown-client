@@ -9,12 +9,15 @@ import {
   TextInput
 } from "react-native";
 
-export default function HomeScreenComponent({navigation, loginData, modalVisible, setModalVisible, doLogin, doLogout}) {
-  const [userNameValue, onChangeUsernameText] = React.useState('');
+export default function HomeScreenComponent({navigation, loginData, modalVisible, 
+  setModalVisible, doLogin, doLogout, checkUsername, didEnterUsername, usernameExists}) {
+
+  const [usernameValue, onChangeUsernameText] = React.useState('');
+  const [passwordValue, onChangePasswordText] = React.useState('');
   let isLoggedIn = (loginData.loginStatus && loginData.loginName != "Login");
 
   var headerText = isLoggedIn ? "You are currently logged in as " + loginData.loginName + "." : "You are not currently logged in."
-  
+
   return (
     <View style={styles.centeredView}>
       {isLoggedIn ? 
@@ -68,20 +71,38 @@ export default function HomeScreenComponent({navigation, loginData, modalVisible
             <TextInput
               style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%", padding: 3, marginBottom: 10}}
               onChangeText={text => onChangeUsernameText(text)}
-              value={userNameValue}
+              onSubmitEditing={(e) => {
+                if (doLogin(usernameValue.trim(), passwordValue.trim())) {
+                  setModalVisible(false);
+                }
+              }}
+              value={usernameValue}
             />
+
+
+            { didEnterUsername && usernameExists ? 
+              <View style={{width: "100%"}}>
+                <Text style={styles.modalChooseNameText}>Enter Password:</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%", padding: 3, marginBottom: 10}}
+                  onChangeText={text => onChangePasswordText(text)}
+                  onSubmitEditing={(e) => {
+                    if (doLogin(usernameValue.trim(), passwordValue.trim())) {
+                      setModalVisible(false);
+                    }
+                  }}
+                  secureTextEntry={true}
+                  value={passwordValue}
+                /> 
+              </View>
+                : null
+            }
             <View style={{ flexDirection:"row" }}>
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "green", marginRight: 5 }}
                 onPress={() => {
-                  console.log(userNameValue);
-                  console.log(0 !== userNameValue.length);
-                  console.log(loginData.loginName === 'Login');
-                  if (userNameValue && 0 !== userNameValue.length && userNameValue.toLowerCase() !== 'login' && loginData.loginName.toLowerCase() === 'login') {
-                    doLogin(userNameValue.trim())
+                  if (doLogin(usernameValue.trim(), passwordValue.trim())) {
                     setModalVisible(false);
-                  } else {
-                    alert("Null or invalid username. Please enter a valid username.")
                   }
                 }}
               >

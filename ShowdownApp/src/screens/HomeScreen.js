@@ -12,10 +12,28 @@ export default function HomeScreen() {
   const [loginStatus, setLoginStatus] = useState(false);
   const [loginName, setLoginName] = useState("Login");
   const [modalVisible, setModalVisible] = useState(false);
+  const [usernameExists, setUsernameExists] = useState(false);
+  const [didEnterUsername, setDidEnterUsername] = React.useState(false);
+  
 
-  function doLogin(name){
+  function showdownLogin(username,password){
     setLoginStatus(true);
-    setLoginName(name);
+  }
+
+  function doLogin(username, password){
+    if(!checkUsername(username)){
+      return false;
+    }
+
+    if (!(password && 0 !== password.length)) {
+      alert('This account has been registered. Please enter the password.');
+      return false;
+    }
+
+    showdownLogin(username, password);
+    setLoginName(username);
+
+    return true;
   }
 
   function doLogout(){
@@ -23,6 +41,18 @@ export default function HomeScreen() {
     setLoginName("Login");
   }
 
+  function checkUsername(username){
+    if (!(username && 0 !== username.length 
+      && username.toLowerCase() !== 'login' 
+      && loginData.loginName.toLowerCase() === 'login')) {
+      alert("Null or invalid username. Please enter a valid username.")
+      return false;
+    } else {
+      setDidEnterUsername(true);
+      setUsernameExists(true);
+      return true;
+    }
+  }
   
   var loginData = {
     loginName: loginName,
@@ -45,7 +75,7 @@ export default function HomeScreen() {
                   setModalVisible(true);
                 }}
                 title={loginName}
-                color="#bb82bd"
+                color={loginStatus ? "#bb82bd" : "#fff"}
               />
             ),
             headerRightContainerStyle: {
@@ -53,7 +83,15 @@ export default function HomeScreen() {
             }
           }}
         >
-          {props => <HomeScreenComponent {...props} loginData={loginData} modalVisible={modalVisible} setModalVisible={setModalVisible} doLogin={doLogin} doLogout={doLogout}  />}
+          {props => <HomeScreenComponent {...props} 
+            loginData={loginData} 
+            modalVisible={modalVisible} 
+            setModalVisible={setModalVisible} 
+            doLogin={doLogin} 
+            doLogout={doLogout}
+            checkUsername={checkUsername}
+            didEnterUsername={didEnterUsername}
+            usernameExists={usernameExists}  />}
 
         </Stack.Screen>
       </Stack.Navigator>
