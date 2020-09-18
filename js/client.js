@@ -238,6 +238,7 @@ function toId() {
 		 *     triggered if the login server did not return a response
 		 */
 		finishRename: function (name, assertion) {
+			console.log(assertion);
 			if (assertion.slice(0, 14).toLowerCase() === '<!doctype html') {
 				// some sort of MitM proxy; ignore it
 				var endIndex = assertion.indexOf('>');
@@ -316,6 +317,8 @@ function toId() {
 							gapi.auth2.getAuthInstance().signOut(); // eslint-disable-line no-undef
 						} catch (e) {}
 					}
+
+					console.log(data.error);
 					app.addPopup(LoginPasswordPopup, {
 						username: name,
 						error: data.error || 'Wrong password.',
@@ -417,42 +420,42 @@ function toId() {
 				} else {
 					this.addRoom('lobby', null, true);
 				}
-				Storage.whenPrefsLoaded(function () {
-					if (!Config.server.registered) {
-						app.send('/autojoin');
-						Backbone.history.start({pushState: !Config.testclient});
-						return;
-					}
-					// Support legacy tournament setting and migrate to new pref
-					if (Dex.prefs('notournaments') !== undefined) {
-						Dex.prefs('tournaments', Dex.prefs('notournaments') ? 'hide' : 'notify');
-						Dex.prefs('notournaments', null, true);
-					}
-					var autojoin = (Dex.prefs('autojoin') || '');
-					var autojoinIds = [];
-					if (typeof autojoin === 'string') {
-						// Use the existing autojoin string for showdown, and an empty string for other servers.
-						if (Config.server.id !== 'showdown') autojoin = '';
-					} else {
-						// If there is not autojoin data for this server, use a empty string.
-						autojoin = autojoin[Config.server.id] || '';
-					}
-					if (autojoin) {
-						var autojoins = autojoin.split(',');
-						for (var i = 0; i < autojoins.length; i++) {
-							var roomid = toRoomid(autojoins[i]);
-							app.addRoom(roomid, null, true, autojoins[i]);
-							if (roomid === 'staff' || roomid === 'upperstaff') continue;
-							if (Config.server.id !== 'showdown' && roomid === 'lobby') continue;
-							autojoinIds.push(roomid);
-						}
-					}
-					app.send('/autojoin ' + autojoinIds.join(','));
-					var settings = Dex.prefs('serversettings') || {};
-					if (Object.keys(settings).length) app.user.set('settings', settings);
-					// HTML5 history throws exceptions when running on file://
-					Backbone.history.start({pushState: !Config.testclient});
-				});
+				// Storage.whenPrefsLoaded(function () {
+				// 	if (!Config.server.registered) {
+				// 		app.send('/autojoin');
+				// 		Backbone.history.start({pushState: !Config.testclient});
+				// 		return;
+				// 	}
+				// 	// Support legacy tournament setting and migrate to new pref
+				// 	if (Dex.prefs('notournaments') !== undefined) {
+				// 		Dex.prefs('tournaments', Dex.prefs('notournaments') ? 'hide' : 'notify');
+				// 		Dex.prefs('notournaments', null, true);
+				// 	}
+				// 	var autojoin = (Dex.prefs('autojoin') || '');
+				// 	var autojoinIds = [];
+				// 	if (typeof autojoin === 'string') {
+				// 		// Use the existing autojoin string for showdown, and an empty string for other servers.
+				// 		if (Config.server.id !== 'showdown') autojoin = '';
+				// 	} else {
+				// 		// If there is not autojoin data for this server, use a empty string.
+				// 		autojoin = autojoin[Config.server.id] || '';
+				// 	}
+				// 	if (autojoin) {
+				// 		var autojoins = autojoin.split(',');
+				// 		for (var i = 0; i < autojoins.length; i++) {
+				// 			var roomid = toRoomid(autojoins[i]);
+				// 			app.addRoom(roomid, null, true, autojoins[i]);
+				// 			if (roomid === 'staff' || roomid === 'upperstaff') continue;
+				// 			if (Config.server.id !== 'showdown' && roomid === 'lobby') continue;
+				// 			autojoinIds.push(roomid);
+				// 		}
+				// 	}
+				// 	app.send('/autojoin ' + autojoinIds.join(','));
+				// 	var settings = Dex.prefs('serversettings') || {};
+				// 	if (Object.keys(settings).length) app.user.set('settings', settings);
+				// 	// HTML5 history throws exceptions when running on file://
+				// 	Backbone.history.start({pushState: !Config.testclient});
+				// });
 			}
 
 			var self = this;
@@ -722,12 +725,12 @@ function toId() {
 					Config.server.port + Config.sockjsprefix, [], {timeout: 5 * 60 * 1000});
 			};
 			this.socket = constructSocket();
-
 			var socketopened = false;
 			var altport = (Config.server.port === Config.server.altport);
 			var altprefix = false;
 
 			this.socket.onopen = function () {
+				
 				socketopened = true;
 				if (altport && window.ga) {
 					ga('send', 'event', 'Alt port connection', Config.server.id);
@@ -813,6 +816,7 @@ function toId() {
 				return;
 			}
 			if (window.console && console.log) {
+				console.log(this.curRoom);
 				console.log('>> ' + data);
 			}
 			this.socket.send(data);
@@ -978,8 +982,8 @@ function toId() {
 					parts = data.slice(1, nlIndex).split('|');
 				}
 				var parsed = BattleTextParser.parseNameParts(parts[1]);
+				console.log(parsed);
 				var named = !!+parts[2];
-
 				var userid = toUserid(parsed.name);
 				if (userid === this.user.get('userid') && parsed.name !== this.user.get('name')) {
 					$.post(app.user.getActionPHP(), {

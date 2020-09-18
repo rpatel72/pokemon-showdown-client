@@ -5,6 +5,7 @@ import Constants from 'expo-constants';
 import { Platform } from "expo-core";
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreenComponent from '../components/home/HomeScreenComponent';
+import { submitCheckUsernameRequest } from '../utilities/Network'
 
 const Stack = createStackNavigator();
 
@@ -49,7 +50,11 @@ export default function HomeScreen() {
       return false;
     } else {
       setDidEnterUsername(true);
-      setUsernameExists(true);
+    
+      submitCheckUsernameRequest(username);
+
+
+      // setUsernameExists(true);
       return true;
     }
   }

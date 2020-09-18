@@ -1,0 +1,38 @@
+// Received from socket onconnect:
+
+RECEIVED: a["|updateuser| Guest 3911181|0|1|{\"blockChallenges\":false,\"blockPMs\":false,\"ignoreTickets\":false,\"hideBattlesFromTrainerCard\":false,\"doNotDisturb\":false,\"hiddenNextBattle\":false,\"inviteOnlyNextBattle\":false,\"language\":null}\n|formats|,1|Sw/Sh Singles|[Gen 8] Random Battle,f|[Gen 8] Unrated Random Battle,b|[Gen 8] OU,e|[Gen 8] OU (Blitz),e|[Gen 8] Ubers,e|[Gen 8] UU,e|[Gen 8] RU,e|[Gen 8] NU,e|[Gen 8] PU,e|[Gen 8] LC,e|[Gen 8] Monotype,e|[Gen 8] 1v1,e|[Gen 8] Anything Goes,c|[Gen 8] ZU,e|[Gen 8] CAP,e|[Gen 8] Battle Stadium Singles,1e|[Gen 8] Custom Game,c|,1|Sw/Sh Doubles|[Gen 8] Random Doubles Battle,f|[Gen 8] Doubles OU,e|[Gen 8] Doubles Ubers,e|[Gen 8] Doubles UU,e|[Gen 8] VGC 2020,1e|[Gen 8] Battle Stadium Doubles,1e|[Gen 8] 2v2 Doubles,c|[Gen 8] Metronome Battle,e|[Gen 8] Doubles Custom Game,c|,1|National Dex|[Gen 8] National Dex,e|[Gen 8] National Dex UU,e|[Gen 8] National Dex AG,e|[Gen 8] National Dex BH,e|,1|Pet Mods|[Gen 8] Megamax,e|[Gen 8] Optimons,c|[Gen 6] Gen-NEXT OU,8|,2|OM of the Month|[Gen 8] Inheritance,e|[Gen 8] 350 Cup,e|,2|Other Metagames|[Gen 8] Balanced Hackmons,e|[Gen 8] Mix and Mega,e|[Gen 8] Almost Any Ability,e|[Gen 8] STABmons,e|[Gen 8] NFE,e|[Gen 8] Camomons,c|[Gen 8] Cross Evolution,c|[Gen 8] Godly Gift,c|[Gen 8] Pure Hackmons,c|[Gen 8] Shared Power,c|[Gen 8] Tier Shift,c|[Gen 8] Trademarked,c|[Gen 7] Balanced Hackmons,c|,2|Randomized Metas|[Gen 8] Monotype Random Battle,f|[Gen 8] Challenge Cup 1v1,f|[Gen 8] Challenge Cup 2v2,d|[Gen 8] Hackmons Cup,f|[Gen 8] Doubles Hackmons Cup,d|[Gen 8] CAP 1v1,f|[Gen 7] Random Battle,f|[Gen 7] Random Doubles Battle,d|[Gen 7] Battle Factory,f|[Gen 7] BSS Factory,d|[Gen 7] Hackmons Cup,d|[Gen 7] Super Staff Bros Brawl,f|[Gen 7 Let's Go] Random Battle,d|[Gen 6] Random Battle,f|[Gen 6] Battle Factory,d|[Gen 5] Random Battle,f|[Gen 4] Random Battle,f|[Gen 3] Random Battle,f|[Gen 2] Random Battle,f|[Gen 1] Random Battle,f|[Gen 1] Challenge Cup,9|,3|RoA Spotlight|[Gen 4] Ubers,e|[Gen 5] 2v2 Doubles,e|[Gen 1] NU,e|,3|Past Gens OU|[Gen 7] OU,e|[Gen 6] OU,e|[Gen 5] OU,e|[Gen 4] OU,e|[Gen 3] OU,e|[Gen 2] OU,e|[Gen 1] OU,e|,3|US/UM Singles|[Gen 7] Ubers,e|[Gen 7] UU,e|[Gen 7] RU,c|[Gen 7] NU,c|[Gen 7] PU,c|[Gen 7] LC,c|[Gen 7] Monotype,e|[Gen 7] 1v1,c|[Gen 7] Anything Goes,e|[Gen 7] ZU,c|[Gen 7] CAP,c|[Gen 7] Battle Spot Singles,1c|[Gen 7 Let's Go] OU,1c|[Gen 7] Custom Game,c|,3|US/UM Doubles|[Gen 7] Doubles OU,e|[Gen 7] Doubles UU,c|[Gen 7] VGC 2019,1c|[Gen 7] VGC 2018,1c|[Gen 7] VGC 2017,1c|[Gen 7] Battle Spot Doubles,1c|[Gen 7] Doubles Custom Game,c|,4|OR/AS Singles|[Gen 6] Ubers,c|[Gen 6] UU,c|[Gen 6] RU,c|[Gen 6] NU,c|[Gen 6] PU,c|[Gen 6] LC,c|[Gen 6] Monotype,c|[Gen 6] 1v1,c|[Gen 6] Anything Goes,c|[Gen 6] CAP,c|[Gen 6] Battle Spot Singles,1c|[Gen 6] Custom Game,c|,4|OR/AS Doubles/Triples|[Gen 6] Doubles OU,c|[Gen 6] VGC 2016,1c|[Gen 6] Battle Spot Doubles,1c|[Gen 6] Doubles Custom Game,c|[Gen 6] Battle Spot Triples,1c|[Gen 6] Triples Custom Game,c|,4|B2/W2 Singles|[Gen 5] Ubers,c|[Gen 5] UU,c|[Gen 5] RU,c|[Gen 5] NU,c|[Gen 5] PU,c|[Gen 5] LC,c|[Gen 5] Monotype,c|[Gen 5] 1v1,c|[Gen 5] GBU Singles,1c|[Gen 5] Custom Game,c|,4|B2/W2 Doubles|[Gen 5] Doubles OU,c|[Gen 5] GBU Doubles,1c|[Gen 5] Doubles Custom Game,c|[Gen 5] Triples Custom Game,c|,5|DPP Singles|[Gen 4] UU,c|[Gen 4] NU,c|[Gen 4] PU,c|[Gen 4] LC,c|[Gen 4] 1v1,c|[Gen 4] Anything Goes,c|[Gen 4] Custom Game,c|,5|DPP Doubles|[Gen 4] Doubles OU,c|[Gen 4] Doubles Custom Game,c|,5|Past Generations|[Gen 3] Ubers,c|[Gen 3] UU,c|[Gen 3] NU,c|[Gen 3] 1v1,c|[Gen 3] Custom Game,c|[Gen 3] Doubles Custom Game,c|[Gen 2] Ubers,c|[Gen 2] UU,c|[Gen 2] NU,c|[Gen 2] Custom Game,c|[Gen 1] Ubers,c|[Gen 1] UU,c|[Gen 1] OU (Tradeback),c|[Gen 1] Stadium OU,c|[Gen 1] Custom Game,c"]
+
+RECEIVED: a["|challstr|4|2fe401a3ac9725eca0e1a7ffaf6a78ffa961676e975e55c8bdfbb50242449a4e40e3b7c9bd92ee5fcf6e9b9cfd885d1444d83715c1815d57a0dccf04d2cb8a81889c9d57314905ef6e36747751d0e8087007849cc756b37a4bce8ce1cbbaee1c4d2cc818b4e0744abc1ed6f2706cab48aaf6582056fb822fe7fc02f361c54d75"]
+
+
+curl 'https://play.pokemonshowdown.com/~~showdown/action.php' \
+  -H 'authority: play.pokemonshowdown.com' \
+  -H 'accept: */*' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'origin: null' \
+  -H 'sec-fetch-site: cross-site' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  --data-raw 'act=getassertion&userid=sdfjbnvukhb&challstr=4%7C3bda2c82324030b31f616b3837a9dfe6d29185149df4e03cc1bedb058c3cd1a9a0e9e96fff3ba6b650a897fe87acf5856743658bdc1363bfebfd7e5a0facc8f213ae4a836a4872b3b80202310df5bac9d11156b1fd547b7782b0e264e9cbe3be437961108dbe9964bc5b2f9494ef96440e8a7e7fecde7480310fa887df9b92f6%7C647445mqf9479345mqf9622645mqf9876945mqf93172&sid=Ultrasanity%2C57160948%2C4c06da9b5c02490777fb8ca51600143835' \
+  --compressed
+
+
+https://sim3.psim.us:443/showdown
+
+
+TypeError: (0, _Random.default) is not a function. (In '(0, _Random.default)(1000)', '(0, _Random.default)' is undefined)
+
+<global>
+    App.js:11:12
+loadModuleImplementation
+    require.js:321:11
+<global>
+    AppEntry.js:3
+loadModuleImplementation
+    require.js:321:11
+guardedLoadModule
+    require.js:201:44
+global code
+    AppEntry.bundle?platform=ios&dev=true&minify=false&hot=false:158489:3
