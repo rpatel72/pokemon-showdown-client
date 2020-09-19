@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, StyleSheet } from "react-native";
 import Constants from 'expo-constants';
 import { Platform } from "expo-core";
@@ -7,16 +7,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreenComponent from '../components/home/HomeScreenComponent';
 import { submitCheckUsernameRequest } from '../utilities/Network'
 
-console.log(global.BattleTextParser.parseBattleLine);
 const Stack = createStackNavigator();
 
-export default function HomeScreen() {
+export default function HomeScreen({updateUser, challStr}) {
   const [loginStatus, setLoginStatus] = useState(false);
   const [loginName, setLoginName] = useState("Login");
   const [modalVisible, setModalVisible] = useState(false);
   const [usernameExists, setUsernameExists] = useState(false);
   const [didEnterUsername, setDidEnterUsername] = React.useState(false);
   
+  useEffect(() => {
+    // if(updateUser && updateUser.name.toLowerCase().includes("Guest ")){
+    //   setLoginName("Login");
+    // }
+  });
 
   function showdownLogin(username,password){
     setLoginStatus(true);
@@ -51,11 +55,13 @@ export default function HomeScreen() {
       return false;
     } else {
       setDidEnterUsername(true);
-    
-      submitCheckUsernameRequest(username);
+      
+      if(challStr){
+        submitCheckUsernameRequest(username, challStr);
+      }
 
 
-      // setUsernameExists(true);
+      setUsernameExists(true);
       return true;
     }
   }

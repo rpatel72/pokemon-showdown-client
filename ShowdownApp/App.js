@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -6,9 +7,12 @@ import HomeScreen from './src/screens/HomeScreen'
 import SettingsScreen from './src/screens/SettingsScreen'
 import BattleScreen from './src/screens/BattleScreen'
 import { generateWSString } from './src/utilities/Network'
+import { parseIncomingData } from './src/utilities/DataTools'
 import SockJS from 'sockjs-client';
-
 require('./src/utilities/BattleTextParser');
+
+
+// console.log(global.BattleTextParser.parseNameParts);
 
 const Tab = createBottomTabNavigator();
 
@@ -18,27 +22,47 @@ ws.onopen = () => {
   console.log("Connected"); 
 };
 
-ws.onmessage = (e) => {
-  console.log(e.data);
-};
 
 ws.onerror = (e) => {
-  console.log(e.message);
+  // console.log(e.message);
 };
 
 ws.onclose = (e) => {
-  console.log(e.code, e.reason);
+  // console.log(e.code, e.reason);
 };
 
-function loadBattleTestParser(){
-  return;
-}
-
 export default function App() {
+  const [updateUser, setUpdateUser] = useState({});
+  const [challStr, setChallStr] = useState({});
+
+  useEffect(() => {
+    ws.onmessage = (e) => {
+      var data = e.data.replace('a["', '').replace('"]', '');
+      console.log(" ");
+      // console.log(data);
+      var dataArray = data.split("\\n")
+      // console.log(dataArray.length);
+
+      for (var dataString of dataArray){
+        // console.log("DATASTRING");
+        // console.log(dataString);
+        var initialConfig = parseIncomingData(dataString);
+
+        if(initialConfig){
+          if('updateuser' in initialConfig) {
+            setUpdateUser(initialConfig.updateuser);
+          } else if ('challstr' in initialConfig){
+            setChallStr(initialConfig.challstr);
+          }
+        }
+      }
+    };
+  });
+
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" children={()=><HomeScreen ws={ws} />} />
+        <Tab.Screen name="Home" children={()=><HomeScreen updateUser={updateUser} challStr={challStr}/>} />
         <Tab.Screen name="Battle" component={BattleScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
