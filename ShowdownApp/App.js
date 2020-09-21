@@ -15,8 +15,10 @@ require('./src/utilities/BattleTextParser');
 // console.log(global.BattleTextParser.parseNameParts);
 
 const Tab = createBottomTabNavigator();
+const wsString = generateWSString();
+console.log(wsString);
+var ws = new SockJS('https://sim3.psim.us/showdown', [], {timeout: 5 * 60 * 1000});
 
-var ws = new WebSocket(generateWSString());
 
 ws.onopen = () => {
   console.log("Connected"); 
@@ -24,11 +26,11 @@ ws.onopen = () => {
 
 
 ws.onerror = (e) => {
-  // console.log(e.message);
+  console.log(e.message);
 };
 
 ws.onclose = (e) => {
-  // console.log(e.code, e.reason);
+  console.log(e.code, e.reason);
 };
 
 export default function App() {
@@ -39,7 +41,7 @@ export default function App() {
     ws.onmessage = (e) => {
       var data = e.data.replace('a["', '').replace('"]', '');
       console.log(" ");
-      // console.log(data);
+      console.log(data);
       var dataArray = data.split("\\n")
       // console.log(dataArray.length);
 
@@ -53,7 +55,10 @@ export default function App() {
             setUpdateUser(initialConfig.updateuser);
           } else if ('challstr' in initialConfig){
             setChallStr(initialConfig.challstr);
+          } else {
+            console.log(initialConfig);
           }
+          
         }
       }
     };
@@ -62,7 +67,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" children={()=><HomeScreen updateUser={updateUser} challStr={challStr}/>} />
+        <Tab.Screen name="Home" children={()=><HomeScreen updateUser={updateUser} challStr={challStr} socket={ws}/>} />
         <Tab.Screen name="Battle" component={BattleScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>

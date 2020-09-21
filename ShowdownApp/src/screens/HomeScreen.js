@@ -6,10 +6,11 @@ import { Platform } from "expo-core";
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreenComponent from '../components/home/HomeScreenComponent';
 import { submitCheckUsernameRequest } from '../utilities/Network'
+import { sendWsMessage } from '../utilities/DataTools'
 
 const Stack = createStackNavigator();
 
-export default function HomeScreen({updateUser, challStr}) {
+export default function HomeScreen({updateUser, challStr, socket}) {
   const [loginStatus, setLoginStatus] = useState(false);
   const [loginName, setLoginName] = useState("Login");
   const [modalVisible, setModalVisible] = useState(false);
@@ -26,7 +27,7 @@ export default function HomeScreen({updateUser, challStr}) {
     setLoginStatus(true);
   }
 
-  function doLogin(username, password){
+  async function doLogin(username, password){
     if(!checkUsername(username)){
       return false;
     }
@@ -47,7 +48,7 @@ export default function HomeScreen({updateUser, challStr}) {
     setLoginName("Login");
   }
 
-  function checkUsername(username){
+  async function checkUsername(username){
     if (!(username && 0 !== username.length 
       && username.toLowerCase() !== 'login' 
       && loginData.loginName.toLowerCase() === 'login')) {
@@ -57,7 +58,14 @@ export default function HomeScreen({updateUser, challStr}) {
       setDidEnterUsername(true);
       
       if(challStr){
-        submitCheckUsernameRequest(username, challStr);
+        let response = await submitCheckUsernameRequest(username, challStr);
+        
+        if (response.includes('/trn')){
+
+          // socket.send(JSON.stringify({'msg': response}));
+          sendWsMessage(socket, response, 0);
+          console.log("sent");
+        }
       }
 
 

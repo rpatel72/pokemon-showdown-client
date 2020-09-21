@@ -721,6 +721,8 @@ function toId() {
 			var constructSocket = function () {
 				var protocol = (Config.server.port === 443 || Config.server.https) ? 'https' : 'http';
 				Config.server.host = $.trim(Config.server.host);
+				console.log(protocol + '://' + Config.server.host + ':' +
+				Config.server.port + Config.sockjsprefix);
 				return new SockJS(protocol + '://' + Config.server.host + ':' +
 					Config.server.port + Config.sockjsprefix, [], {timeout: 5 * 60 * 1000});
 			};
@@ -819,6 +821,7 @@ function toId() {
 				console.log(this.curRoom);
 				console.log('>> ' + data);
 			}
+			console.log(this.socket);
 			this.socket.send(data);
 		},
 		/**

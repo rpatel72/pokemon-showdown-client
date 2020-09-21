@@ -150,7 +150,7 @@ export function parseIncomingData(data){
     case 'updateuser':
         var nlIndex = data.indexOf('\n');
         if (nlIndex > 0) {
-            this.receive(data.substr(nlIndex + 1));
+            parseIncomingData(data.substr(nlIndex + 1));
             parts = data.slice(1, nlIndex).split('|');
         }
         var parsed = global.BattleTextParser.parseNameParts(parts[1]);
@@ -298,4 +298,51 @@ export function parseIncomingData(data){
 
 
 
+}
+
+
+export function parseAssertion(name, assertion){
+            // console.log(assertion);
+            if (assertion.slice(0, 14).toLowerCase() === '<!doctype html') {
+                // some sort of MitM proxy; ignore it
+                var endIndex = assertion.indexOf('>');
+                if (endIndex > 0) assertion = assertion.slice(endIndex + 1);
+            }
+            if (assertion.charAt(0) === '\r') assertion = assertion.slice(1);
+            if (assertion.charAt(0) === '\n') assertion = assertion.slice(1);
+            if (assertion.indexOf('<') >= 0) {
+                app.addPopupMessage("Something is interfering with our connection to the login server. Most likely, your internet provider needs you to re-log-in, or your internet provider is blocking Pokémon Showdown.");
+                return;
+            }
+            if (assertion === ';') {
+                return 'login:authrequired | ' + name;
+            } else if (assertion === ';;@gmail') {
+                return 'login:authrequired | ' +  name + ' @gmail';
+            } else if (assertion.substr(0, 2) === ';;') {
+                return  'login:invalidname | ' + name + ' ' + assertion.substr(2);
+            } else if (assertion.indexOf('\n') >= 0 || !assertion) {
+                return "Something is interfering with our connection to the login server.";
+            } else {
+                console.log('else hit');
+                return '/trn ' + name + ',0,' + assertion;
+            }
+        }
+
+
+export function sendWsMessage(socket, data, room) {
+    if (room && room !== 'lobby' && room !== true) {
+        data = room + '|' + data;
+    } else if (room !== true) {
+        data = '|' + data;
+    }
+    // if (!this.socket || (this.socket.readyState !== SockJS.OPEN)) {
+    //     if (!this.sendQueue) this.sendQueue = [];
+    //     this.sendQueue.push(data);
+    //     return;
+    // }
+    // if (window.console && console.log) {
+    //     console.log(this.curRoom);
+    //     console.log('>> ' + data);
+    // }
+    socket.send(JSON.stringify(data));
 }

@@ -1,4 +1,5 @@
 import { numberString, string } from './Random'
+import { parseAssertion } from './DataTools'
 
 
 export const submitCheckUsernameRequest = async (username, challStr) => {
@@ -18,9 +19,12 @@ export const submitCheckUsernameRequest = async (username, challStr) => {
         body: formData
       });
       let text = await response.text();
-      console.log(text);
+      
+      return parseAssertion(username, text);
+      
     } catch (error) {
       console.error(error);
+      return null;
     }
   };
 
