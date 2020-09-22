@@ -9,14 +9,14 @@ import {
   TextInput
 } from "react-native";
 
-export default function HomeScreenComponent({navigation, loginData, modalVisible, 
+export default function HomeScreenComponent({navigation, loginName, loginStatus, modalVisible, 
   setModalVisible, doLogin, doLogout, checkUsername, didEnterUsername, usernameExists}) {
 
   const [usernameValue, onChangeUsernameText] = React.useState('');
   const [passwordValue, onChangePasswordText] = React.useState('');
-  let isLoggedIn = (loginData.loginStatus && loginData.loginName != "Login");
+  let isLoggedIn = (loginStatus && loginName != "Login");
 
-  var headerText = isLoggedIn ? "You are currently logged in as " + loginData.loginName + "." : "You are not currently logged in."
+  var headerText = isLoggedIn ? "You are currently logged in as " + loginName + "." : "You are not currently logged in."
 
   return (
     <View style={styles.centeredView}>

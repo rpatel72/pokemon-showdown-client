@@ -7,20 +7,28 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreenComponent from '../components/home/HomeScreenComponent';
 import { submitCheckUsernameRequest } from '../utilities/Network'
 import { sendWsMessage } from '../utilities/DataTools'
+import { updateElementAccess } from 'typescript';
+
 
 const Stack = createStackNavigator();
 
 export default function HomeScreen({updateUser, challStr, socket}) {
-  const [loginStatus, setLoginStatus] = useState(false);
   const [loginName, setLoginName] = useState("Login");
+  const [loginStatus, setLoginStatus] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [usernameExists, setUsernameExists] = useState(false);
   const [didEnterUsername, setDidEnterUsername] = React.useState(false);
   
   useEffect(() => {
-    // if(updateUser && updateUser.name.toLowerCase().includes("Guest ")){
-    //   setLoginName("Login");
-    // }
+    console.log("Homescreen side:");
+    console.log(updateUser);
+    if(updateUser && updateUser.name){
+      if(updateUser.name.toLowerCase().includes('guest')){
+        setLoginName("Login")
+      } else {
+        setLoginName(updateUser.name)
+      }
+    }
   });
 
   function showdownLogin(username,password){
@@ -40,6 +48,7 @@ export default function HomeScreen({updateUser, challStr, socket}) {
     showdownLogin(username, password);
     setLoginName(username);
 
+
     return true;
   }
 
@@ -50,21 +59,18 @@ export default function HomeScreen({updateUser, challStr, socket}) {
 
   async function checkUsername(username){
     if (!(username && 0 !== username.length 
-      && username.toLowerCase() !== 'login' 
-      && loginData.loginName.toLowerCase() === 'login')) {
+      && !username.toLowerCase().includes('guest'))) {
       alert("Null or invalid username. Please enter a valid username.")
       return false;
     } else {
       setDidEnterUsername(true);
       
       if(challStr){
-        let response = await submitCheckUsernameRequest(username, challStr);
-        
+        let response = await submitCheckUsernameRequest(socket, username, challStr);
+        setUsernameExists(false);
         if (response.includes('/trn')){
-
-          // socket.send(JSON.stringify({'msg': response}));
           sendWsMessage(socket, response, 0);
-          console.log("sent");
+          setLoginStatus(true);
         }
       }
 
@@ -73,11 +79,7 @@ export default function HomeScreen({updateUser, challStr, socket}) {
       return true;
     }
   }
-  
-  var loginData = {
-    loginName: loginName,
-    loginStatus: loginStatus
-  }
+
   return (
       <Stack.Navigator >
         <Stack.Screen
@@ -104,7 +106,8 @@ export default function HomeScreen({updateUser, challStr, socket}) {
           }}
         >
           {props => <HomeScreenComponent {...props} 
-            loginData={loginData} 
+            loginName={loginName} 
+            loginStatus={loginStatus}
             modalVisible={modalVisible} 
             setModalVisible={setModalVisible} 
             doLogin={doLogin} 

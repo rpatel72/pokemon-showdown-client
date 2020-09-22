@@ -1,8 +1,8 @@
 import { numberString, string } from './Random'
-import { parseAssertion } from './DataTools'
+import { parseAssertion, sendWsMessage} from './DataTools'
 
 
-export const submitCheckUsernameRequest = async (username, challStr) => {
+export const submitCheckUsernameRequest = async (socket, username, challStr) => {
     console.log("checking " + username);
     var formData = new FormData();
     formData.append('act', 'getassertion');
@@ -20,7 +20,9 @@ export const submitCheckUsernameRequest = async (username, challStr) => {
       });
       let text = await response.text();
       
-      return parseAssertion(username, text);
+      let parsed = parseAssertion(username, text);
+      return parsed;
+      
       
     } catch (error) {
       console.error(error);

@@ -15,8 +15,7 @@ require('./src/utilities/BattleTextParser');
 // console.log(global.BattleTextParser.parseNameParts);
 
 const Tab = createBottomTabNavigator();
-const wsString = generateWSString();
-console.log(wsString);
+
 var ws = new SockJS('https://sim3.psim.us/showdown', [], {timeout: 5 * 60 * 1000});
 
 
@@ -40,8 +39,8 @@ export default function App() {
   useEffect(() => {
     ws.onmessage = (e) => {
       var data = e.data.replace('a["', '').replace('"]', '');
-      console.log(" ");
-      console.log(data);
+      // console.log(" ");
+      // console.log(data);
       var dataArray = data.split("\\n")
       // console.log(dataArray.length);
 
@@ -56,13 +55,18 @@ export default function App() {
           } else if ('challstr' in initialConfig){
             setChallStr(initialConfig.challstr);
           } else {
-            console.log(initialConfig);
+            // console.log(initialConfig);
           }
           
         }
       }
     };
-  });
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("App side:");
+  //   console.log(updateUser);
+  // })
 
   return (
     <NavigationContainer>
