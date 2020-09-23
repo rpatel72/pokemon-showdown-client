@@ -5,7 +5,7 @@ import Constants from 'expo-constants';
 import { Platform } from "expo-core";
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreenComponent from '../components/home/HomeScreenComponent';
-import { submitCheckUsernameRequest } from '../utilities/Network'
+import { submitCheckUsernameRequest, submitLoginRequest } from '../utilities/Network'
 import { sendWsMessage } from '../utilities/DataTools'
 import { updateElementAccess } from 'typescript';
 
@@ -22,6 +22,7 @@ export default function HomeScreen({updateUser, challStr, socket}) {
   useEffect(() => {
     console.log("Homescreen side:");
     console.log(updateUser);
+    console.log(loginName);
     if(updateUser && updateUser.name){
       if(updateUser.name.toLowerCase().includes('guest')){
         setLoginName("Login")
@@ -31,32 +32,42 @@ export default function HomeScreen({updateUser, challStr, socket}) {
     }
   });
 
-  function showdownLogin(username,password){
+  function showdownLogin(username, password){
     setLoginStatus(true);
   }
 
   async function doLogin(username, password){
-    if(!checkUsername(username)){
-      return false;
+    var uExists = await checkUsername(username);
+    if(!uExists){
+      console.log("TEST1");
+      return true;
     }
+    console.log("TEST2");
 
-    if (!(password && 0 !== password.length)) {
+    if (!password || 0 === password.length) {
       alert('This account has been registered. Please enter the password.');
       return false;
+    } else {
+      let response = await submitLoginRequest(username, password, challStr);
+      console.log("TEST7");
+      // console.log(response);
+      if (response.includes('/trn')){
+        console.log(response);
+        sendWsMessage(socket, response, 0);
+        setLoginStatus(true);
+      }
     }
 
-    showdownLogin(username, password);
-    setLoginName(username);
-
-
-    return true;
+    return false;
   }
 
   function doLogout(){
     setLoginStatus(false);
     setLoginName("Login");
+    sendWsMessage(socket, '//logout', null);
   }
 
+  //return true if exists, false if not
   async function checkUsername(username){
     if (!(username && 0 !== username.length 
       && !username.toLowerCase().includes('guest'))) {
@@ -66,17 +77,23 @@ export default function HomeScreen({updateUser, challStr, socket}) {
       setDidEnterUsername(true);
       
       if(challStr){
-        let response = await submitCheckUsernameRequest(socket, username, challStr);
-        setUsernameExists(false);
+        let response = await submitCheckUsernameRequest(username, challStr);
+        if(response.includes("login:authrequired")){
+          console.log("TEST3");
+          console.log("Need to sign in with password");
+          setUsernameExists(true);
+          return true;
+        }
+
         if (response.includes('/trn')){
+          console.log(response);
           sendWsMessage(socket, response, 0);
           setLoginStatus(true);
         }
       }
 
-
-      setUsernameExists(true);
-      return true;
+      console.log("TEST4");
+      return false;
     }
   }
 

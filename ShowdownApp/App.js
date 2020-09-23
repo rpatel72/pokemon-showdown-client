@@ -45,8 +45,8 @@ export default function App() {
       // console.log(dataArray.length);
 
       for (var dataString of dataArray){
-        // console.log("DATASTRING");
-        // console.log(dataString);
+        console.log(" ");
+        console.log(dataString);
         var initialConfig = parseIncomingData(dataString);
 
         if(initialConfig){

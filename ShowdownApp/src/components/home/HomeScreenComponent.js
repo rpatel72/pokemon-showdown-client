@@ -73,6 +73,7 @@ export default function HomeScreenComponent({navigation, loginName, loginStatus,
               onChangeText={text => onChangeUsernameText(text)}
               onSubmitEditing={(e) => {
                 if (doLogin(usernameValue.trim(), passwordValue.trim())) {
+                  console.log("TEST5");
                   setModalVisible(false);
                 }
               }}
@@ -100,8 +101,11 @@ export default function HomeScreenComponent({navigation, loginName, loginStatus,
             <View style={{ flexDirection:"row" }}>
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "green", marginRight: 5 }}
-                onPress={() => {
-                  if (doLogin(usernameValue.trim(), passwordValue.trim())) {
+                onPress={async () => {
+                  var loggedIn = await doLogin(usernameValue.trim(), passwordValue.trim()); 
+                  console.log(loggedIn);
+                  if (loggedIn) {
+                    console.log("TEST6");
                     setModalVisible(false);
                   }
                 }}
